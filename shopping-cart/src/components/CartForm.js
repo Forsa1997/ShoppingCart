@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 class CartForm extends Component {
   state = {
+    id : 40
 /*       currentQuantity: 0,
       currentProduct: null, */
   };

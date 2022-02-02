@@ -43,6 +43,15 @@ class CartItemComponent extends Component {
     ],
   };
 
+  calculateTotal = () => {
+    let totalPrice = 0;
+    this.state.itemList.forEach(
+      item => {totalPrice += item.product.priceInCents * item.quantity}
+    )
+    return totalPrice / 100;
+  }
+
+
   addItemsToItemsList = (id, quantity) => {
     /*     this.state.products.forEach((product) => {
       if (product.id == id) {
@@ -112,6 +121,9 @@ class CartItemComponent extends Component {
               quantity={item.quantity}
             />
           ))}
+        </div>
+        <div>
+          Total Price: {this.calculateTotal()}$
         </div>
         <CartForm
           products={this.state.products}
