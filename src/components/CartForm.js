@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class CartForm extends Component {
   state = {
-    id : 40
+    id : 1
 /*       currentQuantity: 0,
       currentProduct: null, */
   };
@@ -40,8 +40,8 @@ class CartForm extends Component {
             onChange={this.onChange}
             name="id"
           >
-            {this.props.products.map((item) => (
-              <option value={item.id}>{item.name} </option>
+            {this.props.products.map((item,i) => (
+              <option key={i} value={item.id}>{item.name} </option>
             ))}
           </select>
           <button type="submit" className="btn btn-primary" >
