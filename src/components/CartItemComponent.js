@@ -42,11 +42,34 @@ class CartItemComponent extends Component {
     ],
   };
 
+  BaseURL = "http://localhost:8082";
+
+  addItemToServer = async (id, quantity) => {
+    let item = {
+      quantity: quantity,
+      product_id: id,
+    }
+    const response = await fetch(`${this.BaseURL}/api/items`,
+    {
+      method: "POST",
+      body: JSON.stringify(item),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+
+    const resp = await response.json();
+    console.log(resp);
+    this.componentDidMount()
+    //this.addItemsToItemsList(id, quantity);
+  }
+
   componentDidMount = async () => {
     console.log("Mounted");
-    const BaseURL = "http://localhost:8082";
-    const responseProducts = await fetch(`${BaseURL}/api/products`);
-    const responseItems = await fetch(`${BaseURL}/api/items`);
+    
+    const responseProducts = await fetch(`${this.BaseURL}/api/products`);
+    const responseItems = await fetch(`${this.BaseURL}/api/items`);
     const productsJson = await responseProducts.json();
     const itemsJson = await responseItems.json();
 
@@ -126,7 +149,7 @@ class CartItemComponent extends Component {
         </div>
         <CartForm
           products={this.state.products}
-          addItem={this.addItemsToItemsList}
+          addItem={this.addItemToServer}
         />
       </div>
     );
